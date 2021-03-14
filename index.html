@@ -1,0 +1,115 @@
+<html>
+<head>
+<title>शुभा वार्ता - Good News in Sanskrit</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/underscore@1.11.0/underscore-min.js"></script>
+<style>
+body {
+	background-color: #000000;
+	color: #FFFFFF;
+}
+
+.logo {
+	position: fixed;
+	z-index: 1000;
+}
+
+.logo img {
+	height: 40px;
+}
+
+.featured_video {
+	height: 70vh;
+	background-size: cover;
+	background-position: center;
+}
+
+.featured_video .gradient {
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(rgba(0,0,0,0), #000);
+}
+
+.card {
+	transition: all 0.2s ease-in-out;
+}
+
+.card:hover {
+	transform: scale(1.15);
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function(event) {
+	ready();
+})
+
+function ready() {
+	let url = 'https://api.sheety.co/4d6c301d1b38b077bddf7cd9f39152b9/youflix/videos';
+	fetch(url)
+	.then((response) => response.json())
+	.then(json => {
+		let videos = json.videos;
+		// Parse out YouTube ID from the URL, as we'll use that to get the thumbnail
+		videos.forEach(video => {
+			let regex = /watch\?v=([\w\d-]*)/;
+			video.youtubeID = video.url.match(regex)[1];
+		});
+		
+		let featuredVideo = videos.find(video => {
+			return video.isFeatured;
+		});
+	
+		let groupedVideos = _.groupBy(json.videos, 'category');
+		var template = Handlebars.compile(document.getElementById("app-template").innerHTML);
+		// Render items into Handlebars template, and set the html of the container element
+		document.getElementById('app').innerHTML = template({
+			featured: featuredVideo,
+			videos: groupedVideos
+		});
+	});
+}
+
+</script>
+<script id="app-template" type="text/x-handlebars-template">
+	
+	<div class="container-fluid pl-5 pt-3 logo">
+		<img src="ssv.png">
+	</div>
+	<div class="featured_video" style="background-image:url('https://img.youtube.com/vi/{{featured.youtubeID}}/maxresdefault.jpg')">
+		<div class="gradient d-flex align-items-end">
+			<div class="container-fluid p-5 ">
+				<div class="row">
+					<div class="col-md-6">
+						<h3>{{featured.name}}</h3>
+						<p>{{featured.description}}</p>
+						<a class="btn btn-light" href="{{featured.url}}">Play Video</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid pl-5 pr-5">
+		{{#each this.videos as |category|}}
+			<h5>{{@key}}</h5>
+			<div class="row">
+				{{#each this as |video|}}
+					<div class="col-md-3">
+						<div class="card bg-dark mb-3">
+							<a href="{{video.url}}">
+								<img src="https://img.youtube.com/vi/{{video.youtubeID}}/maxresdefault.jpg" class="card-img-top">
+							</a>
+              <p>{{video.desc21}} - {{video.date}}</p>
+						</div>
+					</div>
+				{{/each}}
+			</div>
+		{{/each}}
+	</div>
+</script>
+</head>
+<body>
+<div id="app">आगमिष्यति ...</div>
+</body>
+</html>
