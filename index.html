@@ -75,6 +75,7 @@ function ready() {
 	
 	<div class="container-fluid pl-5 pt-3 logo">
 		<img src="ssv.png">
+		<a href="https://www.youtube.com/playlist?list=PLofrqGxIuL6RJAXDLX2Y35js8MNJYH-GT" target="vaartaa.ml">YouTube Playlist</a>
 	</div>
 	<div class="featured_video" style="background-image:url('https://img.youtube.com/vi/{{featured.youtubeID}}/maxresdefault.jpg')">
 		<div class="gradient d-flex align-items-end">
@@ -83,7 +84,7 @@ function ready() {
 					<div class="col-md-6">
 						<h3>{{featured.name}}</h3>
 						<p>{{featured.description}}</p>
-						<a class="btn btn-light" href="{{featured.url}}">Play Video</a>
+						<a class="btn btn-light" href="{{featured.url}}" target="vaartaa.ml">Play Video</a>
 					</div>
 				</div>
 			</div>
@@ -97,7 +98,7 @@ function ready() {
 				{{#each this as |video|}}
 					<div class="col-md-3">
 						<div class="card bg-dark mb-3">
-							<a href="{{video.url}}">
+							<a href="{{video.url}}" target="vaartaa.ml">
 								<img src="https://img.youtube.com/vi/{{video.youtubeID}}/maxresdefault.jpg" class="card-img-top">
 							</a>
               <p>{{video.desc21}} - {{video.date}}</p>
