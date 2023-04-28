@@ -1,0 +1,92 @@
+<html>
+<head>
+<title>vv-edit</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+var title = urlParams.get('title');
+var content = urlParams.get('content');
+var bya = urlParams.get('by');
+var ond = urlParams.get('on');
+var isrc = urlParams.get('src');
+var more = urlParams.get('more');
+</script>
+<style>
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+img{
+max-width: 100%;
+}
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 50%;
+  padding: 0 10px;
+}
+/* Remove extra left and right margins, due to padding */
+.row {margin: 0 -5px;}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+</style>
+</head>
+<body>
+<div class="column">
+<div class="card">
+<h3 id="title"></h3>
+<p id="content"></p>
+<img width="200px" id="np">
+<p id="bya"><i>by </i> </p>
+<p id="ond"><i>on </i> </p>
+<p id="lnk"></p>
+</div>
+</div>
+<form action="mailto:pratidinam@samskritabharatiusa.org" style="float:right">
+<fieldset>
+<legend>(वि)चित्रवार्ता</legend>
+<br>
+<input name="sv" placeholder="शीर्षकवाक्यम्"></input>
+<br>
+<textarea cols=50 rows=10 name="sp" placeholder="अनुच्छेदः / प्रस्तरः ...."></textarea>
+<br>
+<input type="hidden" name="more" id="more"></input>
+<input type="submit">
+</fieldset>
+</form>
+<a href>
+<script>
+$(document).ready(function(){
+//debugger;
+$("#bya").append(bya);
+$("#ond").append(ond);
+$("#content").append(content);
+$("#title").append(title);
+$("#np").attr("src",isrc);
+$("#lnk").html(more);
+$("#more").val(more);
+});
+</script>
+</body>
+</html>
