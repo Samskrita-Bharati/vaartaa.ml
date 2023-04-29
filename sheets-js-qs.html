@@ -128,12 +128,12 @@
 //            spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
 //            range: 'Class Data!A2:E',
 //          });
-		  response = await gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: '13sdbmeiCvI8SsWnwUt_jrAt2pk99YpOdrYftY-fm6QI',
-            range: 'Sheet1!A2:E',
-          });
+	//	  response = await gapi.client.sheets.spreadsheets.values.get({
+    //        spreadsheetId: '13sdbmeiCvI8SsWnwUt_jrAt2pk99YpOdrYftY-fm6QI',
+    //        range: 'Sheet1!A2:E',
+    //      });
 		  
-		  gapi.client.sheets.spreadsheets.values.append({
+	response = await	  gapi.client.sheets.spreadsheets.values.append({
       "spreadsheetId": "13sdbmeiCvI8SsWnwUt_jrAt2pk99YpOdrYftY-fm6QI",
       "range": "1:1",
       "includeValuesInResponse": true,
@@ -150,7 +150,11 @@
           ]
         ]
       }
-    })
+    }).then(function(response) {
+                // Handle the results here (response.result has the parsed body).
+                console.log("Response", response);
+              },
+              function(err) { console.error("Execute error", err); });
 		  
         } catch (err) {
           document.getElementById('content').innerText = err.message;
