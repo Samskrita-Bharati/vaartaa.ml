@@ -1,0 +1,110 @@
+<html>
+<head>
+<title>vv-edit</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+var title = urlParams.get('title');
+var content = urlParams.get('content');
+var bya = urlParams.get('by');
+var ond = urlParams.get('on');
+ond=ond.split(',')[0];
+var isrc = urlParams.get('src');
+var more = urlParams.get('more');
+</script>
+<style>
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+img{
+max-width: 100%;
+}
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 50%;
+  padding: 0 10px;
+}
+/* Remove extra left and right margins, due to padding */
+.row {margin: 0 -5px;}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+</style>
+<script src="vv.js">
+</script>
+</head>
+<body>
+<!--
+['696695641', '1767057859', '1153877375', '897993582', '660786102', '776789786', '645982456', '1736720107', '548852261']
+-->
+<div class="column">
+<div class="card">
+<h3 id="title"></h3>
+<p id="content"></p>
+<img width="200px" id="np">
+<p id="bya"><i>by </i> </p>
+<p id="ond"><i>on </i> </p>
+<p id="lnk"></p>
+</div>
+</div>
+<form method="POST" action="https://docs.google.com/forms/d/e/1FAIpQLSehObS4dAg_NZy4N3Iw61YlO5Z3KW11haA-_yS7Ib7XwkPriQ/formResponse"  style="float:right">
+<fieldset>
+<legend>(वि)चित्रवार्ता</legend>
+<input type="hidden" id="htitle" name="entry.696695641"></input>
+<input type="hidden" id="hcontent" name="entry.1767057859"></input>
+<input type="hidden" id="hauthor" name="entry.1153877375"></input>
+<input type="hidden" id="hdate" name="entry.897993582"></input>
+
+<br>
+<input type="text" name="entry.660786102" id="st" placeholder="शीर्षकवाक्यम्"></input>
+<br>
+<textarea cols=50 rows=10 name="entry.776789786" id="sc" placeholder="अनुच्छेदः / प्रस्तरः ...."></textarea>
+<br>
+<input type="text" id="sa" name="entry.645982456" placeholder="लेखकः / लेखिका ?"></input>
+<input type="hidden" name="entry.1736720107" id="more"></input>
+<input type="hidden" name="entry.548852261" id="hsrc"></input>
+<input type="submit">
+</fieldset>
+</form>
+<a href>
+<script>
+$(document).ready(function(){
+//debugger;
+$("#bya").append(bya);
+$("#ond").append(ond);
+$("#content").append(content);
+$("#title").append(title);
+$("#hcontent").val(content);
+$("#htitle").val(title);
+$("#hauthor").val(bya);
+$("#hdate").val(ond);
+$("#np").attr("src",isrc);
+$("#lnk").html(more);
+$("#more").val(more);
+$("#hsrc").val(isrc);
+});
+</script>
+</body>
+</html>
