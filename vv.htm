@@ -60,7 +60,7 @@ if (!cat) // open mode - 1 is true - not flipped
 	cat="hatke";
 $(document).ready(function(){
 $("#cat").html(cat);
-    $.getJSON("https://inshorts.deta.dev/news?category="+cat, function(result){
+    $.getJSON("https://inshortsapi.vercel.app/news?category="+cat, function(result){
 //	debugger;
 		$.each(result.data, function(i, field){
 		   divstr="";
